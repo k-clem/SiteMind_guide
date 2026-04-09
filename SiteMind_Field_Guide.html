@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SiteMind — Lead Gen Field Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy:  #0B1628;
+    --navy2: #142038;
+    --navy3: #1E3050;
+    --gold:  #C4975A;
+    --gold2: #E8B87A;
+    --white: #FFFFFF;
+    --offwh: #F2EDE3;
+    --muted: rgba(255,255,255,0.5);
+    --dim:   rgba(255,255,255,0.25);
+    --border: rgba(196,151,90,0.2);
+    --green: #2D7A3A;
+    --green-bg: rgba(45,122,58,0.1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--navy2);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 50;
+  }
+  .logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; }
+  .logo span { color: var(--gold); }
+  .badge {
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+    background: rgba(196,151,90,0.12); color: var(--gold);
+    border: 1px solid var(--border); padding: 4px 12px; border-radius: 20px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 4rem 2.5rem 3rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(160deg, var(--navy2) 0%, var(--navy) 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; right: -60px; top: -60px;
+    width: 320px; height: 320px; border-radius: 50%;
+    border: 1px solid var(--border);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; right: 30px; top: 30px;
+    width: 200px; height: 200px; border-radius: 50%;
+    border: 1px solid rgba(196,151,90,0.08);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub { font-size: 0.95rem; color: var(--muted); line-height: 1.8; max-width: 560px; margin-bottom: 2rem; }
+  .stat-row { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+  .stat { }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold); }
+  .stat-label { font-size: 0.72rem; color: var(--dim); letter-spacing: 0.06em; margin-top: 2px; }
+
+  /* ── NAV DOTS ── */
+  .nav-pills {
+    display: flex; gap: 8px; padding: 1.2rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--navy2); overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-pills::-webkit-scrollbar { display: none; }
+  .pill {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 20px; white-space: nowrap;
+    border: 1px solid var(--border); color: var(--muted);
+    text-decoration: none; transition: all 0.2s;
+  }
+  .pill:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── MAIN LAYOUT ── */
+  .content { max-width: 860px; margin: 0 auto; padding: 0 2.5rem 5rem; }
+
+  /* ── SECTION ── */
+  .section { padding: 3rem 0 0; }
+  .section-eyebrow {
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.5rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--gold); }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700; color: var(--white);
+    margin-bottom: 0.8rem; line-height: 1.25;
+  }
+  .section-body { font-size: 0.9rem; color: var(--muted); line-height: 1.8; }
+  .divider { height: 1px; background: var(--border); margin: 2.5rem 0 0; }
+
+  /* ── CARDS ── */
+  .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 1.2rem; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1.2rem; }
+  .card {
+    background: var(--navy2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.1rem 1.2rem;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(196,151,90,0.45); }
+  .card-eyebrow { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+  .card-title { font-size: 0.92rem; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+  .card-body { font-size: 0.8rem; color: var(--muted); line-height: 1.65; }
+
+  /* ── QUOTE BLOCKS ── */
+  .quote {
+    background: var(--navy2); border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0; padding: 1.1rem 1.4rem; margin: 1rem 0;
+  }
+  .quote.green { border-left-color: var(--green); }
+  .quote-label {
+    font-size: 0.62rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 6px;
+  }
+  .quote.green .quote-label { color: #5DBF6E; }
+  .quote-text { font-size: 0.9rem; color: var(--offwh); line-height: 1.8; font-style: italic; }
+
+  /* ── STEPS ── */
+  .steps { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.2rem; }
+  .step { display: flex; gap: 14px; align-items: flex-start; }
+  .step-num {
+    width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(196,151,90,0.1); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.78rem; font-weight: 500; color: var(--gold);
+  }
+  .step-content {}
+  .step-title { font-size: 0.92rem; font-weight: 500; color: var(--white); margin-bottom: 3px; }
+  .step-desc { font-size: 0.83rem; color: var(--muted); line-height: 1.7; }
+
+  /* ── OBJECTIONS ── */
+  .objections { display: flex; flex-direction: column; gap: 8px; margin-top: 1.2rem; }
+  .obj {
+    background: var(--navy2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem 1.2rem;
+  }
+  .obj-q { font-size: 0.88rem; font-weight: 500; color: var(--white); margin-bottom: 5px; }
+  .obj-a { font-size: 0.83rem; color: var(--muted); line-height: 1.7; }
+  .obj-a strong { color: var(--gold); font-weight: 500; }
+
+  /* ── CHECKLIST ── */
+  .checklist { display: flex; flex-direction: column; gap: 8px; margin-top: 1rem; }
+  .check {
+    display: flex; gap: 12px; align-items: flex-start;
+    font-size: 0.88rem; color: var(--muted); line-height: 1.5;
+  }
+  .check-box {
+    width: 18px; height: 18px; border: 1px solid var(--border); border-radius: 4px;
+    flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* ── PRICING ── */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 1.2rem; }
+  .tier {
+    background: var(--navy2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.2rem;
+  }
+  .tier.featured { border-color: rgba(196,151,90,0.5); background: var(--navy3); }
+  .tier-pop { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .tier-name { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .tier-price { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--white); line-height: 1; margin-bottom: 2px; }
+  .tier-earn { font-size: 0.72rem; color: var(--dim); margin-bottom: 1rem; }
+  .tier-line { height: 1px; background: var(--border); margin-bottom: 0.8rem; }
+  .tier-features { font-size: 0.78rem; color: var(--muted); line-height: 1.9; }
+  .tier-features li { list-style: none; padding-left: 1rem; position: relative; }
+  .tier-features li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-size: 0.7rem; }
+
+  /* ── DO/DON'T ── */
+  .dodonts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1.2rem; }
+  .do-col {
+    background: rgba(45,122,58,0.08); border: 1px solid rgba(45,122,58,0.25);
+    border-radius: 10px; padding: 1.1rem 1.2rem;
+  }
+  .dont-col {
+    background: rgba(180,40,40,0.08); border: 1px solid rgba(180,40,40,0.22);
+    border-radius: 10px; padding: 1.1rem 1.2rem;
+  }
+  .col-header { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 10px; }
+  .do-col .col-header { color: #5DBF6E; }
+  .dont-col .col-header { color: #E06060; }
+  .dd-item {
+    font-size: 0.82rem; color: var(--muted); line-height: 1.55;
+    padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .dd-item:last-child { border-bottom: none; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--navy2); border-top: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--muted); }
+  .footer-logo span { color: var(--gold); }
+  .footer p { font-size: 0.75rem; color: var(--dim); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .topbar { padding: 0.9rem 1.2rem; }
+    .hero { padding: 2.5rem 1.2rem 2rem; }
+    .nav-pills { padding: 0.8rem 1.2rem; }
+    .content { padding: 0 1.2rem 4rem; }
+    .grid-3, .pricing-grid { grid-template-columns: 1fr; }
+    .grid-2, .dodonts { grid-template-columns: 1fr; }
+    .stat-row { gap: 1.5rem; }
+    .footer { padding: 1.5rem 1.2rem; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="logo">Site<span>Mind</span></div>
+  <div class="badge">Lead Gen Field Guide</div>
+</div>
+
+<!-- NAV PILLS -->
+<div class="nav-pills">
+  <a href="#what" class="pill">What We Do</a>
+  <a href="#finding" class="pill">Finding Leads</a>
+  <a href="#before" class="pill">Before You Go</a>
+  <a href="#walkin" class="pill">Walk-In Pitch</a>
+  <a href="#phone" class="pill">Phone Pitch</a>
+  <a href="#objections" class="pill">Objections</a>
+  <a href="#payment" class="pill">Getting Paid</a>
+  <a href="#pricing" class="pill">Pricing</a>
+  <a href="#rules" class="pill">Do's & Don'ts</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">SiteMind · San Jose, CA</div>
+  <h1>You Find Them.<br>We Build It.<br><em>Everyone Gets Paid.</em></h1>
+  <p class="hero-sub">This is your complete guide to finding leads, pitching businesses, and closing sales for SiteMind. Read it once, keep it on your phone, and go make money.</p>
+  <div class="stat-row">
+    <div class="stat">
+      <div class="stat-num">50%</div>
+      <div class="stat-label">Your cut of every sale</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">$200–$250</div>
+      <div class="stat-label">You earn per deal</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1 & Done</div>
+      <div class="stat-label">No retainers, ever</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- WHAT WE DO -->
+  <div class="section" id="what">
+    <div class="section-eyebrow">The basics</div>
+    <div class="section-title">What SiteMind does</div>
+    <p class="section-body">SiteMind builds professional websites for local businesses that don't have one — fast, AI-powered, and delivered in a couple of days. One-time price, no monthly fees, no ongoing work after delivery.<br><br>Your job is simple: find businesses without websites, show them a sneak peek of what their site would look like, and close the sale. Kevan handles all the building and deployment.</p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-eyebrow">Your role</div>
+        <div class="card-title">Find & close</div>
+        <div class="card-body">Scout leads, pitch with the mock, collect payment. That's the whole job.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">The product</div>
+        <div class="card-title">Real websites</div>
+        <div class="card-body">You show a finished sneak peek before asking for a dollar. The site sells itself.</div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Your cut</div>
+        <div class="card-title">50% every sale</div>
+        <div class="card-body">Paid same day. No waiting, no invoices — cash or Venmo on the spot.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FINDING LEADS -->
+  <div class="section" id="finding">
+    <div class="section-eyebrow">Step 1</div>
+    <div class="section-title">Finding businesses without websites</div>
+    <p class="section-body">Open Google Maps or Yelp. Search a business category near you. Any listing that doesn't have a "Visit website" button is a lead. It's that simple.</p>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-eyebrow">Best targets</div>
+        <div class="card-body" style="line-height:2;">
+          Nail salons &amp; beauty shops<br>
+          Barbershops<br>
+          Auto repair / mechanics<br>
+          Landscaping &amp; lawn care<br>
+          House cleaning services
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Also great</div>
+        <div class="card-body" style="line-height:2;">
+          Local restaurants &amp; cafés<br>
+          Tailor / alterations shops<br>
+          Dry cleaners<br>
+          Food trucks &amp; catering<br>
+          Handyman / contractors
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- BEFORE YOU GO -->
+  <div class="section" id="before">
+    <div class="section-eyebrow">Step 2</div>
+    <div class="section-title">Before you walk in</div>
+    <p class="section-body">Text Kevan the business name, type, and address before you go. He'll build a sneak peek mock of their website. Pull it up on your phone and make sure it loads cleanly before you approach.</p>
+    <div class="checklist">
+      <div class="check"><div class="check-box"></div>Mock is loaded on your phone and looks good</div>
+      <div class="check"><div class="check-box"></div>You know the business name and type</div>
+      <div class="check"><div class="check-box"></div>You know which tier to recommend (see pricing section)</div>
+      <div class="check"><div class="check-box"></div>Venmo or Zelle ready to send them</div>
+      <div class="check"><div class="check-box"></div>You've read the pitch at least once</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WALK-IN -->
+  <div class="section" id="walkin">
+    <div class="section-eyebrow">Step 3A</div>
+    <div class="section-title">The walk-in pitch</div>
+    <p class="section-body">Walk in relaxed. You're doing them a favor. Find the owner or manager — not just an employee at the counter.</p>
+
+    <div class="quote">
+      <div class="quote-label">Opening — say this first</div>
+      <div class="quote-text">"Hey, my name is [your name] — I work with a web design company called SiteMind. We noticed your business doesn't have a website yet, and we actually put together a sneak peek of what one could look like for you. It's exactly what the final site would look like. Would you mind taking a look?"</div>
+    </div>
+
+    <p class="section-body" style="margin-top:0.5rem;">Show them the mock on your phone. Give them 20–30 seconds. Don't say anything — let them look.</p>
+
+    <div class="quote green">
+      <div class="quote-label">If they seem interested</div>
+      <div class="quote-text">"This is exactly what it would look like live online — your business name, your services, your phone number, everything already in there. We can have it fully live within a couple of days. It's a one-time price, no monthly fees, no subscriptions. Starts at $400 for a clean single page."</div>
+    </div>
+
+    <div class="quote green">
+      <div class="quote-label">Closing — ask for the sale</div>
+      <div class="quote-text">"Want to move forward with it? All I need is half upfront — $[X] — and then the other half when your site goes live. I can send you the payment info right now, and you'll have your website up within a couple of days."</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PHONE -->
+  <div class="section" id="phone">
+    <div class="section-eyebrow">Step 3B</div>
+    <div class="section-title">The phone pitch</div>
+
+    <div class="quote">
+      <div class="quote-label">Opening — how to start the call</div>
+      <div class="quote-text">"Hi, is this [Business Name]? Hey, my name is [your name] and I work with a web design company called SiteMind. The reason I'm calling is we noticed your business doesn't have a website yet, and we put together a quick demo of what it could look like. I can text you the link right now — takes 10 seconds to look at. Would that be okay?"</div>
+    </div>
+
+    <p class="section-body" style="margin-top:0.5rem;">Text them the link immediately after they say yes. Wait 20–30 seconds, then follow up:</p>
+
+    <div class="quote green">
+      <div class="quote-label">Follow-up</div>
+      <div class="quote-text">"Did you get a chance to see it? That's exactly what your finished website would look like — your name, your services, everything. We can have it live within a couple of days for a one-time fee of $[X]. No monthly costs, nothing after that."</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- OBJECTIONS -->
+  <div class="section" id="objections">
+    <div class="section-eyebrow">Step 4</div>
+    <div class="section-title">Handling objections</div>
+    <p class="section-body">Most hesitation is just habit. Stay calm, don't argue, and use these responses.</p>
+    <div class="objections">
+      <div class="obj">
+        <div class="obj-q">"We don't really need a website."</div>
+        <div class="obj-a"><strong>Say:</strong> "A lot of your customers search online before they come in — if they can't find you, they go to a competitor. A website puts you on the map 24/7, even when you're closed."</div>
+      </div>
+      <div class="obj">
+        <div class="obj-q">"How much does it cost?"</div>
+        <div class="obj-a"><strong>Say:</strong> "It's a one-time price — $400 for a clean single-page site, $500 for a full site with all your info. That's it, no monthly fees after."</div>
+      </div>
+      <div class="obj">
+        <div class="obj-q">"I need to think about it."</div>
+        <div class="obj-a"><strong>Say:</strong> "Totally fair — can I leave you my number and send you the link so you can show it to anyone else who needs to see it? No pressure at all."</div>
+      </div>
+      <div class="obj">
+        <div class="obj-q">"We already have someone working on it."</div>
+        <div class="obj-a"><strong>Say:</strong> "No problem at all! If it ever falls through, keep our number — we can turn it around in a couple of days."</div>
+      </div>
+      <div class="obj">
+        <div class="obj-q">"How do I know it'll actually look like that?"</div>
+        <div class="obj-a"><strong>Say:</strong> "You're literally looking at the finished product right now. What you see on your screen is exactly what goes live. It's already built — we just need your go-ahead."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PAYMENT -->
+  <div class="section" id="payment">
+    <div class="section-eyebrow">Step 5</div>
+    <div class="section-title">Collecting payment</div>
+    <p class="section-body">Never leave without the deposit. If they say yes and you walk out empty-handed, it's likely a lost deal.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Collect 50% upfront — right now</div>
+          <div class="step-desc">Send them your Venmo or Zelle immediately while you're still standing there. This locks in the deal.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Text Kevan all the details</div>
+          <div class="step-desc">Business name, type, address, any notes on their hours or services, and which tier they chose. He starts building right away.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Collect the remaining 50% on delivery</div>
+          <div class="step-desc">When the site goes live, you send the client the link and collect the balance. Then both you and Kevan get paid.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PRICING -->
+  <div class="section" id="pricing">
+    <div class="section-eyebrow">Know what you're selling</div>
+    <div class="section-title">Pricing tiers</div>
+    <p class="section-body">Know these cold. If a client asks about price, answer immediately with confidence.</p>
+    <div class="pricing-grid">
+      <div class="tier">
+        <div class="tier-name">Basic</div>
+        <div class="tier-price">$400</div>
+        <div class="tier-earn">You earn $200</div>
+        <div class="tier-line"></div>
+        <ul class="tier-features">
+          <li>Single landing page</li>
+          <li>Hero, services, contact</li>
+          <li>Phone number linked</li>
+          <li>Mobile responsive</li>
+          <li>Custom domain setup</li>
+        </ul>
+      </div>
+      <div class="tier featured">
+        <div class="tier-pop">Most popular</div>
+        <div class="tier-name">Standard</div>
+        <div class="tier-price">$500</div>
+        <div class="tier-earn">You earn $250</div>
+        <div class="tier-line"></div>
+        <ul class="tier-features">
+          <li>Everything in Basic</li>
+          <li>About & hours section</li>
+          <li>Google Maps embed</li>
+          <li>Customer reviews</li>
+          <li>Contact form</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <div class="tier-name">Pro</div>
+        <div class="tier-price">$500+</div>
+        <div class="tier-earn">You earn 50% of agreed price</div>
+        <div class="tier-line"></div>
+        <ul class="tier-features">
+          <li>Everything in Standard</li>
+          <li>Booking or menu links</li>
+          <li>Image gallery</li>
+          <li>Advanced animations</li>
+          <li>Custom scope — ask Kevan</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- DO/DONT -->
+  <div class="section" id="rules">
+    <div class="section-eyebrow">Ground rules</div>
+    <div class="section-title">Do's and don'ts</div>
+    <div class="dodonts">
+      <div class="do-col">
+        <div class="col-header">Always do this</div>
+        <div class="dd-item">Show the mock before talking price</div>
+        <div class="dd-item">Be warm and relaxed — you're helping them</div>
+        <div class="dd-item">Show the mobile view on your phone</div>
+        <div class="dd-item">Send payment info while still there</div>
+        <div class="dd-item">Leave your number if they're not ready</div>
+        <div class="dd-item">Find the owner, not just an employee</div>
+        <div class="dd-item">Move on quickly after a hard no</div>
+      </div>
+      <div class="dont-col">
+        <div class="col-header">Never do this</div>
+        <div class="dd-item">Lead with price before they see the mock</div>
+        <div class="dd-item">Promise exact timelines or guarantees</div>
+        <div class="dd-item">Use technical words or jargon</div>
+        <div class="dd-item">Follow up more than once after a no</div>
+        <div class="dd-item">Promise revisions or changes after delivery</div>
+        <div class="dd-item">Leave without a yes, number, or referral</div>
+        <div class="dd-item">Take it personally if they say no</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-logo">Site<span>Mind</span></div>
+  <p>San Jose, CA · sitemind.co</p>
+  <p>Questions? Text Kevan directly.</p>
+</div>
+
+</body>
+</html>
